@@ -25,6 +25,7 @@ class Loading extends Component {
       .then(() => { return this.animateProgressBarTo(0.98, 1500) })
       .then(() => { return this.animateProgressBarTo(0.99, 1500) })
       .then(() => { return this.animateProgressBarTo(1.00, 1500) })
+      .then(() => { return this.props.onLoadingFinished() })
   }
 
   componentDidMount() {
