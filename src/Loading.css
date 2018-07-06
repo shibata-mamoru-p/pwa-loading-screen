@@ -9,13 +9,18 @@
   flex-direction: column;
 }
 
-#progress-bar {
+.progress-bar-container {
   position: relative;
   width: 200px;
   height: 200px;
 }
 
-#caption {
+.progressbar-text {
+  font-size: 3rem;
+}
+
+.caption {
   margin-top: 80px;
   color: #666;
+  font-size: 2rem;
 }

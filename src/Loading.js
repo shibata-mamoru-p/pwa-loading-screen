@@ -27,19 +27,8 @@ class Loading extends Component {
       .then(() => { return this.animateProgressBarTo(1.00, 1500) })
   }
 
-  render() {
-    return (
-      <div className="Loading">
-        <div id="progress-bar"></div>
-        <div id="caption">
-          <span>Connecting</span>
-        </div>
-      </div>
-    );
-  }
-
   componentDidMount() {
-    this.bar = new ProgressBar.Circle('#progress-bar', {
+    this.bar = new ProgressBar.Circle('.progress-bar-container', {
       color: '#999',
       strokeWidth: 4,
       trailWidth: 1,
@@ -63,9 +52,18 @@ class Loading extends Component {
       }
     });
 
-    this.bar.text.style.fontSize = '2rem';
-
     this.startProgressBarAnimation()
+  }
+
+  render() {
+    return (
+      <div className="Loading">
+        <div className="progress-bar-container"></div>
+        <div className="caption">
+          <span>Connecting</span>
+        </div>
+      </div>
+    );
   }
 
 }
