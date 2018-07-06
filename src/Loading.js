@@ -23,26 +23,33 @@ class Loading extends Component {
       .then(() => { return this.animateProgressBarTo(0.64, 2200) })
       .then(() => { return this.animateProgressBarTo(0.92, 3000) })
       .then(() => { return this.animateProgressBarTo(0.98, 1500) })
+      .then(() => { return this.animateProgressBarTo(0.99, 1500) })
       .then(() => { return this.animateProgressBarTo(1.00, 1500) })
   }
 
   render() {
     return (
-      <div className="Loading"></div>
+      <div className="Loading">
+        <div id="progress-bar"></div>
+        <div id="caption">
+          <span>Connecting</span>
+        </div>
+      </div>
     );
   }
 
   componentDidMount() {
-    this.bar = new ProgressBar.Circle('.Loading', {
-      color: '#aaa',
+    this.bar = new ProgressBar.Circle('#progress-bar', {
+      color: '#999',
       strokeWidth: 4,
       trailWidth: 1,
+      trailColor: '#eee',
       // easing: 'easeInOutQuad',
       text: {
         autoStyleContainer: false
       },
-      from: { color: '#aaa', width: 1 },
-      to: { color: '#333', width: 4 },
+      from: { color: '#FFEA82', width: 1 },
+      to: { color: '#ED6A5A', width: 4 },
       step: function(state, circle) {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
@@ -56,7 +63,6 @@ class Loading extends Component {
       }
     });
 
-    this.bar.text.style.fontFamily = '"Terminal", monospace';
     this.bar.text.style.fontSize = '2rem';
 
     this.startProgressBarAnimation()
