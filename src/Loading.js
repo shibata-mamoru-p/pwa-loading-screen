@@ -7,14 +7,23 @@ class Loading extends Component {
     super(props);
 
     this.animateProgressBarTo = this.animateProgressBarTo.bind(this);
+    this.startProgressBarAnimation = this.startProgressBarAnimation.bind(this);
   }
 
-  animateProgressBarTo(progressBar, percentage, duration) {
+  animateProgressBarTo(percentage, duration) {
     return new Promise((resolve, reject) => {
-      progressBar.animate(percentage, { duration: duration }, function() {
+      this.bar.animate(percentage, { duration: duration }, function() {
           resolve();
       });
     });
+  }
+
+  startProgressBarAnimation() {
+    return this.animateProgressBarTo(0.14, 1000)
+      .then(() => { return this.animateProgressBarTo(0.64, 2200) })
+      .then(() => { return this.animateProgressBarTo(0.92, 3000) })
+      .then(() => { return this.animateProgressBarTo(0.98, 1500) })
+      .then(() => { return this.animateProgressBarTo(1.00, 1500) })
   }
 
   render() {
@@ -24,7 +33,7 @@ class Loading extends Component {
   }
 
   componentDidMount() {
-    var bar = new ProgressBar.Circle('.Loading', {
+    this.bar = new ProgressBar.Circle('.Loading', {
       color: '#aaa',
       strokeWidth: 4,
       trailWidth: 1,
@@ -47,14 +56,10 @@ class Loading extends Component {
       }
     });
 
-    bar.text.style.fontFamily = '"Terminal", monospace';
-    bar.text.style.fontSize = '2rem';
+    this.bar.text.style.fontFamily = '"Terminal", monospace';
+    this.bar.text.style.fontSize = '2rem';
 
-    this.animateProgressBarTo(bar, 0.14, 1000)
-      .then(() => { return this.animateProgressBarTo(bar, 0.64, 2200) })
-      .then(() => { return this.animateProgressBarTo(bar, 0.92, 3000) })
-      .then(() => { return this.animateProgressBarTo(bar, 0.98, 1500) })
-      .then(() => { return this.animateProgressBarTo(bar, 1.00, 1500) })
+    this.startProgressBarAnimation()
   }
 
 }
