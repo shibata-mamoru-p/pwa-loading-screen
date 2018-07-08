@@ -7,6 +7,7 @@ class Loading extends Component {
     super(props);
 
     this.animateProgressBarTo = this.animateProgressBarTo.bind(this);
+    this.sleep = this.sleep.bind(this);
     this.startProgressBarAnimation = this.startProgressBarAnimation.bind(this);
   }
 
@@ -18,6 +19,13 @@ class Loading extends Component {
     });
   }
 
+  sleep(time) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, time)})
+  }
+
   startProgressBarAnimation() {
     return this.animateProgressBarTo(0.14, 1000)
       .then(() => { return this.animateProgressBarTo(0.64, 2200) })
@@ -25,6 +33,7 @@ class Loading extends Component {
       .then(() => { return this.animateProgressBarTo(0.98, 1500) })
       .then(() => { return this.animateProgressBarTo(0.99, 1500) })
       .then(() => { return this.animateProgressBarTo(1.00, 1500) })
+      .then(() => { return this.sleep(1000) })
       .then(() => { return this.props.onLoadingFinished() })
   }
 

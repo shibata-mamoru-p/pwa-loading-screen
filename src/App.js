@@ -24,7 +24,7 @@ class App extends Component {
       <TransitionGroup className="App">
         <CSSTransition
           key={ this.state.loaded }
-          timeout={{ enter: 300, exit: 300 }}
+          timeout={{ enter: 2000, exit: 2000 }}
           classNames={'fade'}>
             { this.state.loaded
               ? <Main />
